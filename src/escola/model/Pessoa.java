@@ -5,10 +5,9 @@ public abstract class Pessoa {
 	protected int rg;
 	protected int cpf;
 	protected int idade;
-	public Pessoa(String nome, int rg, int cpf, int idade, Endereco end){
+	public Pessoa(String nome, int rg, int idade){
 		this.nome=nome;
 		this.rg=rg;
-		this.cpf=cpf;
 		this.idade=idade;
 	}
 	
