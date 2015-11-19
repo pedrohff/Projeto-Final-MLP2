@@ -51,6 +51,16 @@ public class Menu extends JFrame{
 		JButton listarProf = new JButton("Listar Professores");
 		JButton trancar = new JButton("Trancar curso");
 		
+		addAluno.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//setContentPane(MenuaddAluno);
+				
+			}
+		});
+		
+		
 		p2.add(addAluno);
 		p2.add(addProf);
 		p2.add(listarAlunos);

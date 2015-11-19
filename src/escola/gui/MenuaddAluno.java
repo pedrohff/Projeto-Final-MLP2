@@ -15,10 +15,10 @@ import javax.swing.JTextField;
 public class MenuaddAluno extends JFrame{
 	JLabel id;
 	JLabel nome;
-	JLabel email;
+	JLabel rg;
 	JLabel idade;
 	JTextField textNome;
-	JTextField textEmail;
+	JTextField textRg;
 	JTextField textIdade;
 	
 	public MenuaddAluno(){
@@ -42,15 +42,15 @@ public class MenuaddAluno extends JFrame{
 		JPanel cadastro = new JPanel();
 		nome = new JLabel("Nome: ");
 		textNome = new JTextField("Nome completo do Aluno");
-		email = new JLabel("Email: ");
-		textEmail = new JTextField("a@b.com.br");
+		rg = new JLabel("RG: ");
+		textRg = new JTextField("0000000");
 		idade = new JLabel("Idade: ");
 		textIdade = new JTextField("0");
 		
 		cadastro.add(nome);
 		cadastro.add(textNome);
-		cadastro.add(email);
-		cadastro.add(textEmail);
+		cadastro.add(rg);
+		cadastro.add(textRg);
 		cadastro.add(idade);
 		cadastro.add(textIdade);
 		
