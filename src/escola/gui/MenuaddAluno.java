@@ -9,10 +9,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import java.io.*;
+
 import escola.model.Aluno;
-import escola.model.Curso;
 
 public class MenuaddAluno extends JFrame{
+	
+	File alunos = new File("alunos.txt");
 	JLabel id;
 	JLabel nome;
 	JLabel rg;
@@ -44,11 +47,11 @@ public class MenuaddAluno extends JFrame{
 		//cadastro
 		JPanel cadastro = new JPanel();
 		nome = new JLabel("Nome: ");
-		textNome = new JTextField("Nome completo do Aluno");
+		textNome = new JTextField( "Nome completo do Aluno ");
 		rg = new JLabel("RG: ");
-		textRg = new JTextField("0000000");
+		textRg = new JTextField(" 0000000 ");
 		idade = new JLabel("Idade: ");
-		textIdade = new JTextField("0");
+		textIdade = new JTextField(" 00 ");
 		
 		cadastro.add(nome);
 		cadastro.add(textNome);
@@ -63,18 +66,26 @@ public class MenuaddAluno extends JFrame{
 		//fechar
 		JPanel bottom = new JPanel();
 		JButton cadastrar = new JButton("Cadastrar");
-		JButton cancelar = new JButton("Cancelar");
+		JButton cancelar = new JButton("Voltar");
 		bottom.add(cadastrar);
 		bottom.add(cancelar);
 		
+		
+		//funcao botao cadastrar
 		cadastrar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				menu.cadastrar(new Aluno(textNome.getText(), Integer.parseInt(textRg.getText()) , Integer.parseInt(textIdade.getText()), menu.alunos.size(), true));
+				try {
+					menu.cadastrarAluno(new Aluno(textNome.getText(), Integer.parseInt(textRg.getText()) , Integer.parseInt(textIdade.getText()), menu.alunos.size(), true));
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
+		//funcao botao voltar
 		cancelar.addActionListener(new ActionListener() {
 			
 			@Override
@@ -84,13 +95,10 @@ public class MenuaddAluno extends JFrame{
 			}
 		});
 		
+		
 		main.add(bottom, BorderLayout.SOUTH);
+		
 		//conteudo da janela
 		setContentPane(main);
 	}
-	
-	/*public static void main (String[] args){
-		MenuaddAluno m = new MenuaddAluno();
-		m.setVisible(true);
-	}*/
 }

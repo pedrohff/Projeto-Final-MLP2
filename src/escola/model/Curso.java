@@ -5,13 +5,14 @@ import java.util.ArrayList;
 public class Curso {
 	private int id;
 	private String nome;
+	private int periodo;
 	
-	Professor prof;
+
 	ArrayList <Aluno> lista = new ArrayList<Aluno>();
-	public Curso(int id, String nome, Professor P, ArrayList<Aluno> lista){
+	public Curso(int id, String nome, int periodo){
 		this.id=id;
 		this.nome=nome;
-		this.prof=P;
+		this.periodo=periodo;
 	}
 	
 	public int getId(){
@@ -30,21 +31,17 @@ public class Curso {
 		this.nome=nome;
 	}
 	
-	public int getMat(){
-		return lista.size()+1;
+	public int getPeriodo(){
+		return periodo;
 	}
 	
-	public Aluno criarAluno(String nome, int cpf, int rg, int idade){
-		return new Aluno(nome,rg,idade,getMat(),true);
+	public void setPeriodo(int periodo){
+		this.periodo=periodo;
 	}
 	
-	public void addAluno(Aluno A){
-		lista.add(A);
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.id + this.nome + this.periodo;
 	}
-	
-	public void setProfessor(String nome, int rg, int cpf, int idade, int matricula){
-		Professor setprof = new Professor(nome,rg,idade,matricula);
-		this.prof=setprof;
-	}
-	
 }

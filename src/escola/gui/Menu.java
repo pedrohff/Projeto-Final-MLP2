@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import escola.model.Aluno;
 import escola.model.Curso;
 
+import java.io.*;
+
 public class Menu extends JFrame{
 	JLabel label1;
 	JLabel label2;
@@ -20,6 +22,7 @@ public class Menu extends JFrame{
 	JTextField field2;
 	
 	public ArrayList<Aluno> alunos = new ArrayList<>();
+	public ArrayList<Curso> cursos = new ArrayList<>();
 	
 	public Menu(){
 		super("Menu");
@@ -39,7 +42,7 @@ public class Menu extends JFrame{
 		
 		
 		//nomedaescola / topo
-		String nomedaescola = "UNIPEe";
+		String nomedaescola = "UNIPE";
 		label1 = new JLabel(nomedaescola);
 		panel2.add(label1);
 		
@@ -48,15 +51,16 @@ public class Menu extends JFrame{
 		
 		
 		JPanel p2 = new JPanel();
-		JButton addAluno = new JButton("Matricular Aluno");
-		JButton addProf = new JButton("Cadastrar professor");
-		JButton listarAlunos = new JButton("Listar Alunos");
-		JButton listarProf = new JButton("Listar Professores");
+		JButton cadastrarAluno = new JButton("Cadastrar Aluno");
+		JButton criarCurso = new JButton("Criar Curso");
+		JButton matricularAlunos = new JButton("Matricular Alunos");
+		JButton infoCurso = new JButton("Info Curso");
 		JButton trancar = new JButton("Trancar curso");
 		
 		final Menu thisMenu = this;
 		
-		addAluno.addActionListener(new ActionListener() {
+		//abrir menu adicionar aluno
+		cadastrarAluno.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -67,11 +71,22 @@ public class Menu extends JFrame{
 			}
 		});
 		
+		//abrir menu adicionar curso
+		criarCurso.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MenuaddCurso mAddcurso = new MenuaddCurso(thisMenu);
+				
+				mAddcurso.setVisible(true);
+			}
+		});
 		
-		p2.add(addAluno);
-		p2.add(addProf);
-		p2.add(listarAlunos);
-		p2.add(listarProf);
+		
+		p2.add(cadastrarAluno);
+		p2.add(criarCurso);
+		p2.add(matricularAlunos);
+		p2.add(infoCurso);
 		p2.add(trancar);
 		
 		panel1.add(p2, BorderLayout.CENTER);
@@ -79,6 +94,15 @@ public class Menu extends JFrame{
 		JPanel p3 = new JPanel();
 		JButton close = new JButton("Fechar");
 		p3.add(close);
+		
+		close.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+				
+			}
+		});
 		
 		panel1.add(p3, BorderLayout.SOUTH);
 
@@ -93,9 +117,47 @@ public class Menu extends JFrame{
 		//mostra a janela
 		principal.setVisible(true);
 	}
+	
+	public void addAluno (Aluno aluno) throws Exception{
+		FileOutputStream fout= new FileOutputStream ("alunos.txt");
+		ObjectOutputStream oos = new ObjectOutputStream(fout);
+		oos.writeObject(aluno);
+		fout.close();
+	}
 
-	public void cadastrar(Aluno aluno) {
-		
+	public void cadastrarAluno(Aluno aluno) throws Exception{
+		alunos.add(aluno);
+		addAluno(aluno);
 	} 
+	
+	public void salvarCurso(Curso curso) throws Exception{
+		FileOutputStream fout= new FileOutputStream ("cursos.txt");
+		ObjectOutputStream oos = new ObjectOutputStream(fout);
+		oos.writeObject(curso);
+		fout.close();
+	}
+	
+	public void criarCurso(Curso curso) throws Exception{
+		cursos.add(curso);
+		salvarCurso(curso);
+	}
+	
+	public Aluno buscarAluno(int matricula){
+		for(Aluno aluno : alunos){
+			if(aluno.getMatricula() == matricula){
+				return aluno;
+			}
+		}
+		return null;
+	}
+	
+	public Curso buscarCurso(int id){
+		for(Curso curso : cursos){
+			if(curso.getId() == id){
+				return curso;
+			}
+		}
+		return null;
+	}
 
 }

@@ -29,7 +29,7 @@ public class Aluno extends Pessoa{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return this.nome + this.matricula;
+		return this.nome + this.matricula + this.rg + this.idade;
 	}
 	
 }
