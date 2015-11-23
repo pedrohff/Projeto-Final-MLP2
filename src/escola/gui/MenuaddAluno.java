@@ -1,16 +1,16 @@
 package escola.gui;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import escola.model.Aluno;
+import escola.model.Curso;
 
 public class MenuaddAluno extends JFrame{
 	JLabel id;
@@ -21,8 +21,11 @@ public class MenuaddAluno extends JFrame{
 	JTextField textRg;
 	JTextField textIdade;
 	
-	public MenuaddAluno(){
+	Menu menu;
+	
+	public MenuaddAluno(Menu menu){
 		super("MenuaddAluno");
+		this.menu = menu;
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(600, 600);
 		montar();
@@ -54,8 +57,34 @@ public class MenuaddAluno extends JFrame{
 		cadastro.add(idade);
 		cadastro.add(textIdade);
 		
+		
 		main.add(cadastro, BorderLayout.CENTER);
 		
+		//fechar
+		JPanel bottom = new JPanel();
+		JButton cadastrar = new JButton("Cadastrar");
+		JButton cancelar = new JButton("Cancelar");
+		bottom.add(cadastrar);
+		bottom.add(cancelar);
+		
+		cadastrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menu.cadastrar(new Aluno(textNome.getText(), Integer.parseInt(textRg.getText()) , Integer.parseInt(textIdade.getText()), menu.alunos.size(), true));
+			}
+		});
+		
+		cancelar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				
+			}
+		});
+		
+		main.add(bottom, BorderLayout.SOUTH);
 		//conteudo da janela
 		setContentPane(main);
 	}

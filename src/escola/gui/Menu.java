@@ -1,22 +1,25 @@
 package escola.gui;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import escola.model.Aluno;
+import escola.model.Curso;
 
 public class Menu extends JFrame{
 	JLabel label1;
 	JLabel label2;
 	JTextField field1;
 	JTextField field2;
+	
+	public ArrayList<Aluno> alunos = new ArrayList<>();
 	
 	public Menu(){
 		super("Menu");
@@ -51,11 +54,15 @@ public class Menu extends JFrame{
 		JButton listarProf = new JButton("Listar Professores");
 		JButton trancar = new JButton("Trancar curso");
 		
+		final Menu thisMenu = this;
+		
 		addAluno.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//setContentPane(MenuaddAluno);
+				MenuaddAluno mAddaluno = new MenuaddAluno(thisMenu);
+				
+				mAddaluno.setVisible(true);
 				
 			}
 		});
@@ -85,6 +92,10 @@ public class Menu extends JFrame{
 		Menu principal = new Menu();
 		//mostra a janela
 		principal.setVisible(true);
+	}
+
+	public void cadastrar(Aluno aluno) {
+		
 	} 
 
 }
