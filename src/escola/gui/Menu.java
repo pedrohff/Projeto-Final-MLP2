@@ -110,13 +110,8 @@ public class Menu extends JFrame{
 		setContentPane(panel1);
 		//fim
 	}
-
-	public static void main(String[] args) {	
-		//cria a janela
-		Menu principal = new Menu();
-		//mostra a janela
-		principal.setVisible(true);
-	}
+	
+	
 	
 	public void addAluno (Aluno aluno) throws Exception{
 		FileOutputStream fout= new FileOutputStream ("alunos.txt");
@@ -141,6 +136,13 @@ public class Menu extends JFrame{
 		cursos.add(curso);
 		salvarCurso(curso);
 	}
+	
+	public void matricular(int idCurso, int matriculaAluno, File file){
+		
+	}
+	
+	
+	
 	
 	public Aluno buscarAluno(int matricula){
 		for(Aluno aluno : alunos){
