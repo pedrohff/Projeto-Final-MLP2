@@ -85,6 +85,8 @@ public class MenuaddAluno extends JFrame{
 			}
 		});
 		
+		
+		
 		//funcao botao voltar
 		cancelar.addActionListener(new ActionListener() {
 			

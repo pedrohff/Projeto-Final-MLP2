@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import escola.model.Curso;
+import escola.model.Matricula;
 import escola.model.Aluno;
 
 public class MenuMatricular extends JFrame{
@@ -66,7 +67,15 @@ public class MenuMatricular extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				menu.matricular(Integer.parseInt(textId.getText()), Integer.parseInt(textMatricula.getText()), file);
+				try {
+					menu.matricular(new Matricula (Integer.parseInt(textId.getText()), Integer.parseInt(textMatricula.getText())));
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 		});

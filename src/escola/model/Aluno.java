@@ -1,6 +1,8 @@
 package escola.model;
 
-public class Aluno extends Pessoa{
+import java.io.Serializable;
+
+public class Aluno extends Pessoa implements Serializable{
 	private int matricula;
 	private boolean matriculado;
 	public Aluno(String nome, int rg, int idade, int matricula, boolean matriculado){

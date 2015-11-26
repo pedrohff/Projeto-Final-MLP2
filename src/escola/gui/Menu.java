@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import escola.model.Aluno;
 import escola.model.Curso;
+import escola.model.Matricula;
 
 import java.io.*;
 
@@ -55,7 +56,7 @@ public class Menu extends JFrame{
 		JButton criarCurso = new JButton("Criar Curso");
 		JButton matricularAlunos = new JButton("Matricular Alunos");
 		JButton infoCurso = new JButton("Info Curso");
-		JButton trancar = new JButton("Trancar curso");
+		JButton infoAlunos = new JButton("Info Alunos");
 		
 		final Menu thisMenu = this;
 		
@@ -83,11 +84,21 @@ public class Menu extends JFrame{
 		});
 		
 		
+		//abrir info alunos
+		infoAlunos.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MenuListarAlunos listarAlunos = new MenuListarAlunos();
+				listarAlunos.setVisible(true);
+			}
+		});
+		
 		p2.add(cadastrarAluno);
 		p2.add(criarCurso);
 		p2.add(matricularAlunos);
 		p2.add(infoCurso);
-		p2.add(trancar);
+		p2.add(infoAlunos);
 		
 		panel1.add(p2, BorderLayout.CENTER);
 		
@@ -111,7 +122,23 @@ public class Menu extends JFrame{
 		//fim
 	}
 	
-	
+	public void salvarAlunos() throws Exception{
+		FileOutputStream fout= new FileOutputStream ("alunos.txt");
+		ObjectOutputStream oos = new ObjectOutputStream(fout);
+		oos.writeInt(alunos.size());
+		for (Aluno aluno : alunos) {
+			oos.writeObject(aluno);
+		}
+		fout.close();
+		
+		ObjectInputStream ois =new ObjectInputStream(null); 
+		int n = ois.readInt();
+		for (int i = 0; i < n; i++) {
+			Aluno aluno = (Aluno)ois.readObject();
+			alunos.add(aluno);
+		}
+		
+	}
 	
 	public void addAluno (Aluno aluno) throws Exception{
 		FileOutputStream fout= new FileOutputStream ("alunos.txt");
@@ -137,8 +164,11 @@ public class Menu extends JFrame{
 		salvarCurso(curso);
 	}
 	
-	public void matricular(int idCurso, int matriculaAluno, File file){
-		
+	public void matricular(Matricula matricula) throws Exception{
+		FileOutputStream fout = new FileOutputStream("matricula.txt");
+		ObjectOutputStream oos = new ObjectOutputStream(fout);
+		oos.writeObject(matricula);
+		fout.close();
 	}
 	
 	
